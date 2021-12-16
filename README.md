@@ -81,7 +81,7 @@ with open('dataset/math_dataset_md_1.0.pkl', 'rb') as file:
     test_dataset = pickle.load(file)
 ```
 Dataset at a glance (ink fraction distribution across character classes)
-![ink fraction distribution across character labels](https://github.com/MarkoDuksi/PhotoMathEx/images/dataset.png)
+![ink fraction distribution across character labels](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
 
 ## Authors
 
