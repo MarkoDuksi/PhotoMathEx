@@ -73,21 +73,17 @@ not a valid expression
 
 ### Comment on the results
 
-For reference, these results should be compared to actual images in the [@test_images/](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of interal representation of double-precision floating point numbers in python (and most probably any other representation adhering to IEEE 754 specs). As can be seen in image [@04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), 22-digit numbers are not ment to be evaluated. They are only ment to be visually compared for an ad-hoc evaluation of classifier accuracy.
+For reference, these results should be compared to actual images in the [test_images/](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of interal representation of double-precision floating point numbers in python (and most probably any other representation adhering to IEEE 754 specs). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), 22-digit numbers are not ment to be evaluated. They are only ment to be visually compared for an ad-hoc evaluation of classifier accuracy.
 
 ## Additional Resources
 
-A custom-made dataset of 120,016 images used to train the model is available in `dataset` folder. The dataset is in a pickled numpy array format and can be loaded by:
+A custom-made dataset of 120,016 images used to train the model is available in `dataset` folder. The dataset is in a pickled numpy array format (95 MB after uncompressing) and can be loaded by:
 ```
 with open('dataset/math_dataset_md_1.0.pkl', 'rb') as file:
     test_dataset = pickle.load(file)
 ```
-Dataset at a glance (ink fraction distribution across character classes)
+Dataset at a glance (ink fraction distribution across character classes):
 ![ink fraction distribution across character labels](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
-
-### Comment on the dataset
-
-Technical issues prevent uploading a large dataset. Will be investigated.
 
 ## TBD
 - more info on building the dataset
