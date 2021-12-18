@@ -77,11 +77,11 @@ not a valid expression
 
 ### Comments on the output results
 
-For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be evaluated. They were only meant to be visually compared for an ad-hoc evaluation of classifier performance.
+For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be evaluated. They were only meant as a visual _ad hoc_ evaluation of classifier performance.
 
 ## Additional Resources
 
-A custom-made dataset of 120,016 images used to train the model is available in [dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/dataset/) folder. The dataset is in a pickled numpy array format (compressed using *gzip,* 95 MB after uncompressing) and can be loaded by:
+A custom-made dataset of 120,016 images used to train the model is available in [dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/dataset/) folder. The dataset is in a pickled numpy array format (compressed using _gzip,_ 95 MB after uncompressing) and can be loaded by:
 ```
 with open('dataset/math_dataset_md_1.0.pkl', 'rb') as file:
     dataset = pickle.load(file)
@@ -90,16 +90,6 @@ Dataset at a glance (ink fraction distribution across character classes):
 ![ink fraction distribution across character classes](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
 
 Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/2.3.0?topic=locales-posix-portable-file-name-character-set) in mind since the images of generated dataset samples were also stored in a labeled directory structure. This facilitated visual inspection of generated samples which was especially important for evaluating outlier detection.
-
-## Additional Resources
-
-A custom-made dataset of 120,016 images used to train the model is available in [dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/dataset/) folder. The dataset is in a pickled numpy array format (compressed using gzip, 95 MB after uncompressing) and can be loaded by:
-```
-with open('dataset/math_dataset_md_1.0.pkl', 'rb') as file:
-    dataset = pickle.load(file)
-```
-Dataset at a glance (ink fraction distribution across character classes):
-![ink fraction distribution across character labels](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
 
 ## Improvements proposal
 
@@ -110,7 +100,7 @@ Dataset at a glance (ink fraction distribution across character classes):
     - add a smoothed inverse light frame to level up the uneven lighting (including large shadows) - let's call it "poor man's HDR"
 - **undistort lines of content** in the image, enhancing line resolution power for multi-line and/or multiple expressions:
     - **cluster separate lines** into distinct clusters to avoid the Simpson's paradox
-    - consider **multi-label QDA on "line" clusters** to bump up the line resolution power (evaluate computational cost vs. expected benefit)
+    - consider **multi-label QDA on "line" clusters** to bump up the line resolution power (evaluate computational cost _vs._ expected benefit)
     - linear regression (fit to a quadratic curve) to **straighten and level the content of a line** (working on residuals) to raise character resolution power
 
 ### The dataset
@@ -136,7 +126,7 @@ Dataset at a glance (ink fraction distribution across character classes):
         - cons:
             - some typical misclassification examples are still needed for a general idea of the goal
     - or by training some sort of **RNN, GRU or LSTM** network model
-        -pro:
+        - pro:
             - in theory, it could generalize
         - con:
             - lacks any of the pros of the previous approach
