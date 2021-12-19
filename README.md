@@ -15,69 +15,89 @@ Leeeeeearn! Help others.
 Command line execution example with output. Note: apparently, tensorflow routinely spits out lots of irrelevant info to _stderr._ No actual error messages were redirected to /dev/null.
 
 ```
->>> python photomathex.py test_images/0[1-4].jpg 2>/dev/null
+>>> python photomathex.py
+Provide valid image filenames as command line arguments.
 
-from test_images/01.jpg: 0 + 1 + 2 + 3 - 4 - 5 * ( 6 + 7 - ( 8 + 9 ) )
-result = 22
+>>> python photomathex.py non-existent.file test_images/0[1-4].jpg 2>/dev/null
+Could not found: non-existent.file
 
-from test_images/02.jpg: 3 * 8 - 4 * 2 / 4 * ( - ( 3 + 9 ) )
-result = 48
+from test_images/01.jpg:
+0 + 1 + 2 + 3 - 4 - 5 * ( 6 + 7 - ( 8 + 9 ) ) = 22
 
-from test_images/03.jpg: 4 + 6 - ( 1 0 - 3 ) * 2 / 8 * 3
-result = 4.75
+from test_images/02.jpg:
+3 * 8 - 4 * 2 / 4 * ( -( 3 + 9 ) ) = 48
 
-from test_images/04.jpg: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-result = 1111111111111111081984
+from test_images/03.jpg:
+4 + 6 - ( 10 - 3 ) * 2 / 8 * 3 = 4.75
 
-from test_images/04.jpg: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-result = 2222222222222222163968
+from test_images/04.jpg:
+1111111111111111111111 = 1111111111111111081984
 
-from test_images/04.jpg: 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-result = 3333333333333333508096
+from test_images/04.jpg:
+2222222222222222222222 = 2222222222222222163968
 
-from test_images/04.jpg: 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-result = 4444444444444444327936
+from test_images/04.jpg:
+3333333333333333333333 = 3333333333333333508096
 
-from test_images/04.jpg: 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-result = 5555555555555555672064
+from test_images/04.jpg:
+4444444444444444444444 = 4444444444444444327936
 
-from test_images/04.jpg: 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6
-result = 6666666666666667016192
+from test_images/04.jpg:
+5555555555555555555555 = 5555555555555555672064
 
-from test_images/04.jpg: 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
-result = 7777777777777777311744
+from test_images/04.jpg:
+6666666666666666666666 = 6666666666666667016192
 
-from test_images/04.jpg: 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
-result = 8888888888888888655872
+from test_images/04.jpg:
+7777777777777777777777 = 7777777777777777311744
 
-from test_images/04.jpg: 9 9 3 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 3 9 9 9
-result = 9939999999999998951424
+from test_images/04.jpg:
+8888888888888888888888 = 8888888888888888655872
 
-from test_images/04.jpg: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-result = 0
+from test_images/04.jpg:
+9939999999999999993999 = 9939999999999998951424
 
-from test_images/04.jpg: + + + + + + + + + + + + + + + + + + + + + +
+from test_images/04.jpg:
+0000000000000000000000 = 0
+
+from test_images/04.jpg:
++ + + + + + + + + + + + + + + + + + + + + +
 not a valid expression
 
-from test_images/04.jpg: - - - - - - - - - - - - - - - - - - - - - -
+from test_images/04.jpg:
+- - - - - - - - - - - - - - - - - - - - - -
 not a valid expression
 
-from test_images/04.jpg: * * * * * * * * * * * * * * * * * * * * * *
+from test_images/04.jpg:
+* * * * * * * * * * * * * * * * * * * * * *
 not a valid expression
 
-from test_images/04.jpg: / / / / / / / / / / / / / / / / / / / / / /
+from test_images/04.jpg:
+/ / / / / / / / / / / / / / / / / / / / / /
 not a valid expression
 
-from test_images/04.jpg: ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (
+from test_images/04.jpg:
+( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (
 not a valid expression
 
-from test_images/04.jpg: ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )
+from test_images/04.jpg:
+) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )
 not a valid expression
 ```
 
 ### Comments on the output results
 
-For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be evaluated. They were only meant as a visual _ad hoc_ evaluation of classifier performance.
+For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be solved. They were only meant to serve as a handy visual aid in evaluating classifier performance.
+
+## Extractor module
+Best not to repeat myself as the code is very well documented.
+
+## Solver module
+The solver was not implemented as a parse tree as normally thought in courses about data structures. Coming from Perl background I wanted to see if I can build a solver using just regular expressions and simple functions. Quick googling found no one who managed to do it and not for the lack of trying. Additionally, from previous experience in scraping GPX tracks with Beautiful Soup I learned that using even the quickest of all parsers, the lxml was multiple orders of magnitude slower than using regular expressions. Admittedly, speed is not an issue here but me accepting a challenge is. Regular expressions are ugly, there is no denying that fact. But sometimes they just do the job like nothing else can.
+
+The whole implementation of the solver is more about validating the input than actually solving it. I wasn't required to do it, I just wanted some practice. The code is well documented which accounts for more than half of the content in the module, not including the test cases. The solver logic itself is contained in about 20 lines of code between two functions that call each other.
+
+About 60 tests were run each in two different forms. Looking back, I should probably have written a random valid expression generator because there is still a chance that I have missed something in writing the tests manually. The solver result for each validated test expression was successfully compared with the result of python `eval`. Results of (in)validating purposely invalid test cases were successfully compared to _None._
 
 ## Additional Resources
 
@@ -95,13 +115,12 @@ Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/
 
 ### Extractor
 - crop image to **discard marginal non-paper objects** (spiral bindings, parts of a desk, coffee mug...)
-- improve **thresholding reliability:**
+- improve **thresholding performance:**
     - **white balance** the BGR image before desaturating it
-    - add a smoothed inverse light frame to level up the uneven lighting (including large shadows) - let's call it "poor man's HDR"
-- **undistort lines of content** in the image, enhancing line resolution power for multi-line and/or multiple expressions:
+    - determine the optimal threshold value instead of making an educated guess
+- **correct line distortions** in the image, enhancing line resolution power for multi-line and/or multiple expressions:
     - **cluster separate lines** into distinct clusters to avoid the Simpson's paradox
-    - consider **multi-label QDA on "line" clusters** to bump up the line resolution power (evaluate computational cost _vs._ expected benefit)
-    - linear regression (fit to a quadratic curve) to **straighten and level the content of a line** (working on residuals) to raise character resolution power
+    - linear regression (fit to a quadratic curve) to **straighten and level the content of each line** by working only with residuals
 
 ### The dataset
 - build a **high quality dataset:**
@@ -145,8 +164,6 @@ Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/
     - note: this is actually how I thought Photomath app worked until I caught a live Photomath Talk #4 and figured out there must have been a good reason this wasn't the case
 
 ## TBD
-- a few docstrings in the solver module
-- refactor the code
 - more info on building the dataset (image-editing skills built through decades of photography experience came in really handy here)
 - details on building and training the model (nothing spectacular)
 - discussion of model performance (nothing spectacular)
@@ -154,7 +171,7 @@ Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/
 - maybe process some fun example images-expressions
 
 ## Left to be desired
-By my criteria - a lot. But I should mainly mention one point from the assignment that was left out from this implementation. Returning the coordinates of the detected characters extracted from the input image. Due to time constraints, this straightforward task of limited learning value surrendered to _"Don't stress too much about fulfilling all the requirements."_ instruction.
+By my criteria - a lot. But I should mainly mention one point from the assignment that was left out from this implementation. Returning the coordinates of the detected characters extracted from the input image. Due to time constraints, this straightforward task of limited learning value gracefully surrendered to _"Don't stress too much about fulfilling all the requirements."_ instruction.
 
 ## Authors
 
