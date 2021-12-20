@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import numpy as np
-
+# import cv2 as cv
 
 # set reasonable minimum dimensions for an input image array
 # in practice the range is in thousands of pixels
@@ -18,7 +18,7 @@ MIN_LINE_HEIGHT = 50    # lowest allowable height for the whole line
 
 # used for calculating custom threshold value
 # expressed in units of sigma over the histogram of uint8 values
-WHITE_SPREAD = 2
+WHITE_SPREAD = 3
 
 
 def desaturate(img):
