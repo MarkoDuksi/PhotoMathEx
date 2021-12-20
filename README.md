@@ -93,7 +93,7 @@ For reference, these results should be compared to actual images in the [test_im
 Best not to repeat myself as the code is very well documented.
 
 ## Solver module
-The solver was not implemented as a parse tree as normally thought in courses about data structures. Coming from Perl background I wanted to see if I can build a solver using just regular expressions and simple functions. Quick googling found no one who managed to do it and not for the lack of trying. Additionally, from previous experience in scraping GPX tracks with Beautiful Soup I learned that using even the quickest of all parsers, the lxml was multiple orders of magnitude slower than using regular expressions. Admittedly, speed is not an issue here but me accepting a challenge is. Regular expressions are ugly, there is no denying that fact. But sometimes they just do the job like nothing else can.
+The solver was not implemented as a parse tree as normally thought in courses about data structures. Coming from Perl background I wanted to see if I can build a solver using just regular expressions and simple functions. Quick googling found no one who managed to do it and not for the lack of trying. Additionally, from previous experience in scraping GPX tracks with Beautiful Soup I learned that using even the quickest of all parsers, the lxml was multiple orders of magnitude slower than using regular expressions. Admittedly, speed is not an issue here but me accepting a challenge is. Regular expressions are ugly, there is no denying that fact ([need a reference?](https://github.com/back2root/log4shell-rex)). But sometimes they just do the job like nothing else can.
 
 The whole implementation of the solver is more about validating the input than actually solving it. I wasn't required to do it, I just wanted some practice. The code is well documented which accounts for more than half of the content in the module, not including the test cases. The solver logic itself is contained in about 20 lines of code between two functions that call each other.
 
@@ -110,6 +110,8 @@ Dataset at a glance (ink fraction distribution across character classes):
 ![ink fraction distribution across character classes](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
 
 Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/2.3.0?topic=locales-posix-portable-file-name-character-set) in mind since the images of generated dataset samples were also stored in a labeled directory structure. This facilitated visual inspection of generated samples which was especially important for evaluating outlier detection.
+
+Details in the [01_Building_a_dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/01_Building_a_dataset.ipynb) jupyter notebook.
 
 ## Improvements proposal
 
@@ -164,14 +166,12 @@ Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/
     - note: this is actually how I thought Photomath app worked until I caught a live Photomath Talk #4 and figured out there must have been a good reason this wasn't the case
 
 ## TBD
-- more info on building the dataset (image-editing skills built through decades of photography experience came in really handy here)
-- details on building and training the model (nothing spectacular)
+- info on building and training the model (nothing spectacular)
 - discussion of model performance (nothing spectacular)
-- more visuals in this README
 - maybe process some fun example images-expressions
 
 ## Left to be desired
-By my criteria - a lot. But I should mainly mention one point from the assignment that was left out from this implementation. Returning the coordinates of the detected characters extracted from the input image. Due to time constraints, this straightforward task of limited learning value gracefully surrendered to _"Don't stress too much about fulfilling all the requirements."_ instruction.
+I should mainly mention one point from the assignment that was left out from this implementation. Returning the coordinates of the detected characters extracted from the input image. Due to time constraints, this straightforward task of limited learning value gracefully surrendered to _"Don't stress too much about fulfilling all the requirements."_ instruction.
 
 ## Authors
 
