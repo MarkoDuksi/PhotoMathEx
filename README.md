@@ -89,6 +89,9 @@ not a valid expression
 
 For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be solved. They were only meant to serve as a handy visual aid in evaluating classifier performance.
 
+## The model
+Details in the [02_Building_a_classifier](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/02_Building_a_classifier.ipynb) jupyter notebook.
+
 ## Extractor module
 Best not to repeat myself as the code is very well documented.
 
@@ -164,11 +167,6 @@ Details in the [01_Building_a_dataset](https://github.com/MarkoDuksi/PhotoMathEx
         - as for **T,** I don't know, maybe Photomath gets sold to Google :-)
     - a journey of 384,400 km starts with a single step, so maybe tackle the simplest types of math problems first and build up from there
     - note: this is actually how I thought Photomath app worked until I caught a live Photomath Talk #4 and figured out there must have been a good reason this wasn't the case
-
-## TBD
-- info on building and training the model (nothing spectacular)
-- discussion of model performance (nothing spectacular)
-- maybe process some fun example images-expressions
 
 ## Left to be desired
 I should mainly mention one point from the assignment that was left out from this implementation. Returning the coordinates of the detected characters extracted from the input image. Due to time constraints, this straightforward task of limited learning value gracefully surrendered to _"Don't stress too much about fulfilling all the requirements."_ instruction.
