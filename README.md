@@ -1,6 +1,6 @@
 # PhotoMathEx
 
-An example for a simple [Photomath](https://photomath.com/en/) "pretender" project as per assignment by the **Photomath** team.
+An example for a simple [Photomath](https://photomath.com/en/) "pretender" project as per assignment by the **Photomath** team. The assignment turned out to be inspiring enough to warrant further playing around.
 
 ## Description
 
@@ -10,7 +10,7 @@ Full assignment description is available here: https://github.com/photomath/ml-a
 
 Leeeeeearn! Help others.
 
-## Usage example
+## Usage
 
 Command line execution example with output. Note: apparently, tensorflow routinely spits out lots of irrelevant info to _stderr._ No actual error messages were redirected to /dev/null.
 
@@ -89,9 +89,6 @@ not a valid expression
 
 For reference, these results should be compared to actual images in the [test_images](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/) folder (more examples to follow). There are seemingly random trailing digits present after the first 16 digits of any non-zero number evaluated by the solver. This is due to limitations of internal representation of double-precision floating point numbers in python (and most probably any other representation adhering to [IEEE 754 specs](https://en.wikipedia.org/wiki/IEEE_754)). As can be seen in image [04.jpg](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/test_images/04.jpg?raw=true), the 22-digit numbers were not meant to be solved. They were only meant to serve as a handy visual aid in evaluating classifier performance.
 
-## The model
-Details in the [02_Building_a_classifier](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/02_Building_a_classifier.ipynb) jupyter notebook.
-
 ## Extractor module
 Best not to repeat myself as the code is very well documented.
 
@@ -100,32 +97,16 @@ The solver was not implemented as a parse tree as normally thought in courses ab
 
 The whole implementation of the solver is more about validating the input than actually solving it. I wasn't required to do it, I just wanted some practice. The code is well documented which accounts for more than half of the content in the module, not including the test cases. The solver logic itself is contained in about 20 lines of code between two functions that call each other.
 
-About 60 tests were run each in two different forms. Looking back, I should probably have written a random valid expression generator because there is still a chance that I have missed something in writing the tests manually. The solver result for each validated test expression was successfully compared with the result of python `eval`. Results of (in)validating purposely invalid test cases were successfully compared to _None._
+About 60 tests were run each in two different forms. Looking back, I should probably have written a random valid expression generator because there is still a chance that I have missed something in writing the tests manually. The solver result for each validated test expression was successfully compared with the result of python `eval`.
 
-## Additional Resources
-
-A custom-made dataset of 120,016 images used to train the model is available in [dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/dataset/) folder. The dataset is in a pickled numpy array format (compressed using _gzip,_ 95 MB after uncompressing) and can be loaded by:
-```
-with open('dataset/math_dataset_md_1.0.pkl', 'rb') as file:
-    dataset = pickle.load(file)
-```
-Dataset at a glance (ink fraction distribution across character classes):
+## Dataset
+A dataset was built containing 120,016 images of decimal digits, operators "+", "-", "×", "/" and parentheses "(" and ")". Resources and the code that generates the dataset along with details of the process are available in the [01_Building_datasets](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/01_Building_datasets.ipynb) jupyter notebook. Dataset at a glance (ink fraction distribution across character classes):
 ![ink fraction distribution across character classes](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/images/dataset.png)
 
-Class labels were named with [POSIX compliance](https://www.ibm.com/docs/en/zos/2.3.0?topic=locales-posix-portable-file-name-character-set) in mind since the images of generated dataset samples were also stored in a labeled directory structure. This facilitated visual inspection of generated samples which was especially important for evaluating outlier detection.
-
-Details in the [01_Building_a_dataset](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/01_Building_a_dataset.ipynb) jupyter notebook.
+## The model
+Details in the [02_Building_a_classifier](https://github.com/MarkoDuksi/PhotoMathEx/blob/main/notebooks/02_Building_a_classifier.ipynb) jupyter notebook.
 
 ## Improvements proposal
-
-### Extractor
-- crop image to **discard marginal non-paper objects** (spiral bindings, parts of a desk, coffee mug...)
-- improve **thresholding performance:**
-    - **white balance** the BGR image before desaturating it
-    - determine the optimal threshold value instead of making an educated guess
-- **correct line distortions** in the image, enhancing line resolution power for multi-line and/or multiple expressions:
-    - **cluster separate lines** into distinct clusters to avoid the Simpson's paradox
-    - linear regression (fit to a quadratic curve) to **straighten and level the content of each line** by working only with residuals
 
 ### The dataset
 - build a **high quality dataset:**
@@ -138,6 +119,15 @@ Details in the [01_Building_a_dataset](https://github.com/MarkoDuksi/PhotoMathEx
 - build a **better CNN model:**
     - for this assignment the first guess to the CNN architecture yielded "reasonably" good results as per assignment requirements
     - experiment with modifying the model's architecture to all but eliminate a certain style of "9" being occasionally misclassified as a "3", if possible
+
+### Extractor
+- crop image to **discard marginal non-paper objects** (spiral bindings, parts of a desk, coffee mug...)
+- improve **thresholding performance:**
+    - **white balance** the BGR image before desaturating it
+    - determine the optimal threshold value instead of making an educated guess
+- **correct line distortions** in the image, enhancing line resolution power for multi-line and/or multiple expressions:
+    - **cluster separate lines** into distinct clusters to avoid the Simpson's paradox
+    - linear regression (fit to a quadratic curve) to **straighten and level the content of each line** by working only with residuals
 
 ### Solver
 - **for higher accuracy,** if desired, implement **contextual error correcting** functionality to classifier predictions:
